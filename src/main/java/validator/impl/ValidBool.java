@@ -1,8 +1,10 @@
 package validator.impl;
 
 import attrib.iface.IValidProps;
+import validator.ERR_TYPE;
 import validator.iface.IValid;
 
+/** Of note: Boolean.parseBool() does not throw exception */
 public class ValidBool implements IValid {
     private static ValidBool instance;
 
@@ -13,12 +15,13 @@ public class ValidBool implements IValid {
     private ValidBool(){}
 
     @Override
-    public boolean isGood(String text) {
-        return "true".equalsIgnoreCase(text) || "false".equalsIgnoreCase(text);
+    public ERR_TYPE validate(String text) {
+        return ("true".equals(text) || "false".equals(text))
+                ? ERR_TYPE.NONE : ERR_TYPE.INVALID_BOOL;
     }
 
     @Override
-    public boolean isGood(IValidProps requester, String text) {
-        return this.isGood(text);
+    public ERR_TYPE validate(IValidProps requester, String text) {
+        return this.validate(text);
     }
 }

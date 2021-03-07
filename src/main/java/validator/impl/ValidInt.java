@@ -1,6 +1,7 @@
 package validator.impl;
 
 import attrib.iface.IValidProps;
+import validator.ERR_TYPE;
 import validator.iface.IValid;
 
 public class ValidInt implements IValid {
@@ -13,18 +14,18 @@ public class ValidInt implements IValid {
     private ValidInt(){}
 
     @Override
-    public boolean isGood(String text) {
+    public ERR_TYPE validate(String text) {
         try{
             Integer.parseInt(text);
-            return true;
+            return ERR_TYPE.NONE;
         }
         catch(Exception e){
-            return false;
+            return ERR_TYPE.INVALID_INT;
         }
     }
 
     @Override
-    public boolean isGood(IValidProps requester, String text) {
-        return this.isGood(text);
+    public ERR_TYPE validate(IValidProps requester, String text) {
+        return this.validate(text);
     }
 }

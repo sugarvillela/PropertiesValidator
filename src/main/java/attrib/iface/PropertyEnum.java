@@ -2,8 +2,9 @@ package attrib.iface;
 
 import validator.iface.IValid;
 
+/** Interface for enum sets in 'types' package */
 public interface PropertyEnum {
     String defKey();
-    String defValue();
+    String defVal();
     IValid validator();
 }

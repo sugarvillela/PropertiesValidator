@@ -1,8 +1,9 @@
 package validator.iface;
 
 import attrib.iface.IValidProps;
+import validator.ERR_TYPE;
 
 public interface IValid {
-    boolean isGood(String text);
-    boolean isGood(IValidProps requester, String text);
+    ERR_TYPE validate(String text);
+    ERR_TYPE validate(IValidProps requester, String text);
 }

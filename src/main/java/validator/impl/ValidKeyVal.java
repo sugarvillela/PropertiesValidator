@@ -1,8 +1,10 @@
 package validator.impl;
 
 import attrib.iface.IValidProps;
+import validator.ERR_TYPE;
 import validator.iface.IValid;
 
+/** This one calls the requester to pass back the tokenized key and val */
 public class ValidKeyVal implements IValid {
     private static ValidKeyVal instance;
 
@@ -13,7 +15,7 @@ public class ValidKeyVal implements IValid {
     private ValidKeyVal(){}
 
     @Override
-    public boolean isGood(String text) {
+    public ERR_TYPE validate(String text) {
         String[] tok;
         if(
             text != null &&
@@ -21,13 +23,13 @@ public class ValidKeyVal implements IValid {
             !tok[0].isEmpty() &&
             !tok[1].isEmpty()
         ){
-            return true;
+            return ERR_TYPE.NONE;
         }
-        return false;
+        return ERR_TYPE.NOT_KEY_VAL;
     }
 
     @Override
-    public boolean isGood(IValidProps requester, String text) {
+    public ERR_TYPE validate(IValidProps requester, String text) {
         String[] tok;
         if(
             text != null &&
@@ -36,8 +38,8 @@ public class ValidKeyVal implements IValid {
             !tok[1].isEmpty()
         ){
             requester.receive(tok[0], tok[1]);
-            return true;
+            return ERR_TYPE.NONE;
         }
-        return false;
+        return ERR_TYPE.NOT_KEY_VAL;
     }
 }

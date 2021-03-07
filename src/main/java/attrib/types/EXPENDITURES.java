@@ -1,7 +1,7 @@
 package attrib.types;
 
-import attrib.iface.PropertyEnum;
 import attrib.iface.IValidProps;
+import attrib.iface.PropertyEnum;
 import attrib.impl.ValidPropsBase;
 import validator.Validators;
 import validator.iface.IValid;
@@ -9,16 +9,17 @@ import validator.impl.ValidPropertyEnum;
 
 import java.util.Properties;
 
-public enum RUNTIME_ATTRIB implements PropertyEnum {
-    PROJ_NAME       (Validators.VALID_STRING,   "MyProject"),
-    SOME_BOOLEAN    (Validators.VALID_BOOL,     "true"),
-    SOME_NUMBER     (Validators.VALID_INT,      "75")
+public enum EXPENDITURES implements PropertyEnum {
+    TEQUILA         (Validators.VALID_INT,      "2000"),
+    WINE            (Validators.VALID_INT,      "1700"),
+    BEER            (Validators.VALID_INT,      "5000"),
+    ENTERTAINMENT   (Validators.VALID_BOOL,     "true")
     ;
 
     private final IValid validator;
     private final String defValue;
 
-    RUNTIME_ATTRIB(IValid validator, String defValue) {
+    EXPENDITURES(IValid validator, String defValue) {
         this.validator = validator;
         this.defValue = defValue;
     }
@@ -42,7 +43,7 @@ public enum RUNTIME_ATTRIB implements PropertyEnum {
         @Override
         protected PropertyEnum propertyEnumFromString(String text) {
             try{
-                return RUNTIME_ATTRIB.valueOf(text);
+                return EXPENDITURES.valueOf(text);
             }
             catch(IllegalArgumentException | NullPointerException e){
                 return null;
@@ -54,13 +55,13 @@ public enum RUNTIME_ATTRIB implements PropertyEnum {
         @Override
         protected void init() {
             this.properties = getDefaults();
-            this.validPropertyEnum = RUNTIME_ATTRIB.validPropertyEnum;
+            this.validPropertyEnum = EXPENDITURES.validPropertyEnum;
         }
 
         @Override
         public Properties getDefaults() {
             Properties defaultProperties = new Properties();
-            for(PropertyEnum propertyEnum : RUNTIME_ATTRIB.values()){
+            for(PropertyEnum propertyEnum : EXPENDITURES.values()){
                 defaultProperties.put(propertyEnum.defKey(), propertyEnum.defVal());
             }
             return defaultProperties;
